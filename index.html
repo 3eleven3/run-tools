@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Race Calendar</title>
+
+    <!-- Initial inline styles to prevent flash while JS determines theme / device -->
+    <style>
+      /* Use a CSS variable for initial background, prefer dark if system prefers it */
+      :root { --initial-bg: #ffffff; }
+      @media (prefers-color-scheme: dark) { :root { --initial-bg: #0f172a; } }
+      html.dark { --initial-bg: #0f172a; }
+      body { background: var(--initial-bg); margin: 0; }
+
+      /* Minimal full-screen loading overlay shown until JS marks document as ready */
+      #init-loading {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        color: #cbd5e1; /* light slate for dark */
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+        z-index: 9999;
+      }
+      html:not(.dark) #init-loading { color: #475569; } /* darker text when light */
+      /* Hide the overlay once we add the ready class */
+      html.ready #init-loading { display: none; }
+    </style>
+
+    <!-- Inline script: set theme class (dark/light) and a basic mobile class early -->
+    <script>
+      (() => {
+        try {
+          const stored = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)')?.matches || false;
+          const theme = stored || (prefersDark ? 'dark' : 'light');
+          const isMobile = window.matchMedia?.('(max-width: 767px)')?.matches || false;
+
+          document.documentElement.classList.add(theme);
+
+          // Basic mobile detection to allow early layout adjustments
+          if (isMobile) document.documentElement.classList.add('is-mobile');
+
+          // Mark document ready to hide the initial loading overlay
+          document.documentElement.classList.add('ready');
+        } catch (_e) {
+          // ignore
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="init-loading" aria-hidden="true">Loading…</div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

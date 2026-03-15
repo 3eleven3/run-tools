@@ -1,0 +1,39 @@
+import { Box, Heading, VStack, Tabs } from "@chakra-ui/react";
+import { GarminCsvImporter } from "../components/garmin-csv";
+import { useAppState } from "..//state";
+import { CumulativeDistance } from "./cumulative-distance";
+
+export const Home = () => {
+	const { state } = useAppState();
+
+	return (
+		<VStack gap={4} align="center" py={10}>
+			<Heading as="h1" size="2xl">
+				Run Tools
+			</Heading>
+			<Box w="100%" maxW="6xl">
+				<GarminCsvImporter />
+			</Box>
+			{state.data && (
+				<Box w="100%" maxW="6xl">
+					<Tabs.Root defaultValue="home" variant="outline">
+						<Tabs.List>
+							<Tabs.Trigger value="home">Home</Tabs.Trigger>
+							<Tabs.Trigger value="cumulative-distance">
+								Cumulative Distance
+							</Tabs.Trigger>
+						</Tabs.List>
+						<Box p={2}>
+							<Tabs.Content value="home">
+								Imported {state.data.activityCount} activities.
+							</Tabs.Content>
+							<Tabs.Content value="cumulative-distance">
+								<CumulativeDistance />
+							</Tabs.Content>
+						</Box>
+					</Tabs.Root>
+				</Box>
+			)}
+		</VStack>
+	);
+};

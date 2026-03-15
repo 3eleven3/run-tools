@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="wind emoji">
+  <!-- Transparent background; only the wind emoji -->
+  <text x="50%" y="50%" font-size="36" text-anchor="middle" dominant-baseline="central"
+        font-family="Apple Color Emoji, 'Segoe UI Emoji', 'Noto Color Emoji', 'Segoe UI Symbol'">
+    💨
+  </text>
+</svg>
