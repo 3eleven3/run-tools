@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Button, HStack, Text } from "@chakra-ui/react";
 import { useAppState } from "../state";
 import type { FC } from "react";
 import {
@@ -8,18 +8,49 @@ import {
 	YAxis,
 	CartesianGrid,
 	Tooltip,
-	ReferenceLine,
 	ResponsiveContainer,
 } from "recharts";
 
 const tickInterval = 4;
 
 export const CumulativeDistance: FC = () => {
-	const { state } = useAppState();
+	const { state, setState } = useAppState();
 	const { data: chartData, years } = state.data
 		?.filteredCumulativeMilesByYear ?? {
 		years: [],
 		data: [],
+	};
+
+	const allYears = state.data
+		? Object.keys(state.data.activityYears).sort()
+		: [];
+	const activeYears = state.data?.filters.years ?? allYears;
+
+	const toggleYear = (year: string) => {
+		setState((draft) => {
+			if (!draft.data) return;
+			const all = Object.keys(draft.data.activityYears).sort();
+			const current = draft.data.filters.years;
+			if (!current) {
+				// all currently selected; remove the clicked one
+				draft.data.filters.years = all.filter((y) => y !== year);
+				return;
+			}
+			const isSelected = current.includes(year);
+			if (isSelected) {
+				const next = current.filter((y) => y !== year);
+				draft.data.filters.years = next.length === 0 ? null : next;
+			} else {
+				draft.data.filters.years = [...current, year].sort();
+			}
+		});
+	};
+
+	const resetFilters = () => {
+		setState((draft) => {
+			if (!draft.data) return;
+			draft.data.filters.years = null;
+		});
 	};
 
 	const yearColors = [
@@ -52,61 +83,78 @@ export const CumulativeDistance: FC = () => {
 			: 0;
 
 	return (
-		<ResponsiveContainer width="100%" height={340}>
-			<LineChart
-				data={chartData}
-				margin={{ top: 10, right: 24, left: 0, bottom: 10 }}
-			>
-				<CartesianGrid strokeDasharray="3 3" stroke="#fff" />
-				<XAxis
-					dataKey="week"
-					tick={{ fill: "#fff", fontSize: 11 }}
-					interval={tickInterval}
-					tickFormatter={(v) => String(v)}
-					axisLine={{ stroke: "#fff" }}
-					tickLine={false}
-				/>
-				<YAxis
-					tick={{ fill: "#fff", fontSize: 11 }}
-					axisLine={false}
-					tickLine={false}
-					tickFormatter={(v) => `${v}mi`}
-				/>
-				<Tooltip
-					content={({ active, payload, label }) => {
-						if (active && payload && payload.length > 0) {
-							return (
-								<Box p={2} borderRadius="md">
-									<Box fontWeight="bold">Week: {label}</Box>
-									{payload.map((entry) => (
-										<Box key={entry.name} fontSize="sm">
+		<Box w="100%">
+			<HStack gap={2} mb={4} w="100%" flexWrap="wrap">
+				<Text color="white" fontSize="sm" fontWeight="bold">
+					Years:
+				</Text>
+				{allYears.map((year, idx) => {
+					const isActive = activeYears.includes(year);
+					return (
+						<Button
+							key={year}
+							size="xs"
+							variant={isActive ? "solid" : "outline"}
+							colorScheme={isActive ? "teal" : "gray"}
+							onClick={() => toggleYear(year)}
+						>
+							{year}
+						</Button>
+					);
+				})}
+				<Button size="xs" onClick={resetFilters} ml="auto">
+					Reset
+				</Button>
+			</HStack>
+			<ResponsiveContainer width="100%" height={340}>
+				<LineChart
+					data={chartData}
+					margin={{ top: 10, right: 24, left: 0, bottom: 10 }}
+				>
+					<CartesianGrid strokeDasharray="3 3" stroke="#fff" opacity={0.2} />
+					<XAxis
+						dataKey="week"
+						tick={{ fill: "#fff", fontSize: 11 }}
+						interval={tickInterval}
+						tickFormatter={(v) => String(v)}
+						axisLine={{ stroke: "#fff" }}
+						tickLine={false}
+					/>
+					<YAxis
+						tick={{ fill: "#fff", fontSize: 11 }}
+						axisLine={false}
+						tickLine={false}
+						tickFormatter={(v) => `${v}mi`}
+					/>
+					<Tooltip
+						content={({ active, payload, label }) => {
+							if (active && payload && payload.length > 0) {
+								const entry = payload[0];
+								return (
+									<Box p={2} borderRadius="md">
+										<Box fontWeight="bold">Week: {label}</Box>
+										<Box fontSize="sm">
 											{entry.name}: {(Number(entry.value) || 0).toFixed(2)} mi
 										</Box>
-									))}
-								</Box>
-							);
-						}
-						return null;
-					}}
-				/>
-				<ReferenceLine
-					y={averageCumulative}
-					stroke="#f97316"
-					strokeDasharray="4 4"
-					strokeOpacity={0.5}
-				/>
-				{years.map((year, idx) => (
-					<Line
-						key={year}
-						type="monotone"
-						dataKey={year}
-						stroke={yearColors[idx % yearColors.length]}
-						strokeWidth={2}
-						dot={{ r: 3, strokeWidth: 0 }}
-						activeDot={{ r: 6, fill: "#fff", strokeWidth: 2 }}
+									</Box>
+								);
+							}
+							return null;
+						}}
 					/>
-				))}
-			</LineChart>
-		</ResponsiveContainer>
+					{years.map((year, idx) => (
+						<Line
+							key={year}
+							type="monotone"
+							dataKey={year}
+							stroke={yearColors[idx % yearColors.length]}
+							strokeWidth={2}
+							dot={false}
+							activeDot={{ r: 6, fill: "#fff", strokeWidth: 2 }}
+						/>
+					))}
+				</LineChart>
+			</ResponsiveContainer>
+		</Box>
 	);
 };
