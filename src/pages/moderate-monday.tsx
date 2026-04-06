@@ -58,6 +58,13 @@ const routes: RouteItem[] = [
 		gpxUrl: "https://connect.garmin.com/modern/course/446479327",
 		tags: ["hills"],
 	},
+	{
+		name: "Cemetery",
+		distance: 5.52,
+		elevation: 125,
+		gpxUrl: "https://connect.garmin.com/modern/course/446500092",
+		tags: ["flat"],
+	},
 ];
 
 const defaultState: ModerateMondayState = {
@@ -105,14 +112,13 @@ export const ModerateMondays = () => {
 	const cardBg = useColorModeValue("white", "gray.800");
 	const borderColor = useColorModeValue("gray.200", "gray.700");
 	const filterBg = useColorModeValue("gray.50", "gray.900");
-	const inputBg = useColorModeValue("white", "gray.700");
 	const infoText = useColorModeValue("gray.600", "gray.300");
 
 	return (
 		<VStack gap={6} align="stretch">
 			<Box>
 				<Heading size="xl" mb={2}>
-					Moderate Mondays
+					Moderate Monday
 				</Heading>
 				<Text color={infoText}>
 					Pick a random moderate route and show the winner overlay instantly.
