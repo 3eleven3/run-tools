@@ -6,7 +6,6 @@ import {
 	Button,
 	Heading,
 	HStack,
-	Input,
 	SimpleGrid,
 	Stack,
 	Text,
@@ -17,7 +16,6 @@ import {
 import { useColorModeValue } from "../components/ui/color-mode";
 
 type RouteItem = {
-	id: string;
 	name: string;
 	distance: number;
 	elevation: number;
@@ -28,7 +26,6 @@ type RouteItem = {
 type ModerateMondayState = {
 	activeRoutes: RouteItem[];
 	winner?: RouteItem;
-	search: string;
 	selectedTags: string[];
 	distanceFilter: string;
 	elevationFilter: string;
@@ -36,58 +33,37 @@ type ModerateMondayState = {
 
 const routes: RouteItem[] = [
 	{
-		id: "route-1",
-		name: "Maple Loop",
-		distance: 6.8,
-		elevation: 380,
-		gpxUrl: "https://example.com/gpx/maple-loop.gpx",
-		tags: ["hills", "wooded", "loop"],
+		name: "Hillside",
+		distance: 5.27,
+		elevation: 308,
+		gpxUrl: "https://connect.garmin.com/modern/course/446471891",
+		tags: ["hills"],
 	},
 	{
-		id: "route-2",
-		name: "Riverfront Roll",
-		distance: 5.4,
-		elevation: 120,
-		gpxUrl: "https://example.com/gpx/riverfront-roll.gpx",
-		tags: ["flat", "scenic", "easy"],
+		name: "O&W",
+		distance: 5.63,
+		elevation: 78,
+		gpxUrl: "https://connect.garmin.com/modern/course/446475129",
+		tags: ["flat"],
 	},
 	{
-		id: "route-3",
-		name: "Hill Crusher",
-		distance: 8.3,
-		elevation: 540,
-		gpxUrl: "https://example.com/gpx/hill-crusher.gpx",
-		tags: ["hills", "challenging", "out-and-back"],
+		name: "Hutton Park",
+		distance: 5.55,
+		elevation: 178,
+		gpxUrl: "https://connect.garmin.com/modern/course/446477410",
+		tags: ["hills"],
 	},
 	{
-		id: "route-4",
-		name: "Parkside Peaks",
-		distance: 7.2,
-		elevation: 320,
-		gpxUrl: "https://example.com/gpx/parkside-peaks.gpx",
-		tags: ["hills", "park", "trail"],
-	},
-	{
-		id: "route-5",
-		name: "City Sprint",
-		distance: 4.6,
-		elevation: 80,
-		gpxUrl: "https://example.com/gpx/city-sprint.gpx",
-		tags: ["flat", "fast", "urban"],
-	},
-	{
-		id: "route-6",
-		name: "Lakeside Cruise",
-		distance: 9.1,
-		elevation: 210,
-		gpxUrl: "https://example.com/gpx/lakeside-cruise.gpx",
-		tags: ["flat", "scenic", "long"],
+		name: "Golden Hill",
+		distance: 4.82,
+		elevation: 258,
+		gpxUrl: "https://connect.garmin.com/modern/course/446479327",
+		tags: ["hills"],
 	},
 ];
 
 const defaultState: ModerateMondayState = {
 	activeRoutes: routes,
-	search: "",
 	selectedTags: [],
 	distanceFilter: "any",
 	elevationFilter: "any",
@@ -115,11 +91,6 @@ export const ModerateMondays = () => {
 
 	const filteredRoutes = useMemo(() => {
 		return state.activeRoutes.filter((route) => {
-			const matchSearch = [route.name, route.gpxUrl, route.tags.join(" ")]
-				.join(" ")
-				.toLowerCase()
-				.includes(state.search.toLowerCase());
-
 			const matchTags =
 				state.selectedTags.length === 0 ||
 				state.selectedTags.every((tag) => route.tags.includes(tag));
@@ -134,11 +105,10 @@ export const ModerateMondays = () => {
 				state.elevationFilter === "any" ||
 				state.elevationFilter === elevationCategory;
 
-			return matchSearch && matchTags && matchDistance && matchElevation;
+			return matchTags && matchDistance && matchElevation;
 		});
 	}, [
 		state.activeRoutes,
-		state.search,
 		state.selectedTags,
 		state.distanceFilter,
 		state.elevationFilter,
@@ -185,19 +155,6 @@ export const ModerateMondays = () => {
 				align="center"
 				wrap="wrap"
 			>
-				<Input
-					placeholder="Search name, GPX, or tags"
-					value={state.search}
-					onChange={(event) =>
-						setState((draft) => {
-							draft.search = event.target.value;
-						})
-					}
-					maxW={{ base: "100%", md: "360px" }}
-					bg={inputBg}
-					borderColor={borderColor}
-					shadow="sm"
-				/>
 				<Button
 					colorScheme="teal"
 					onClick={pickRandomRoute}
@@ -325,7 +282,7 @@ export const ModerateMondays = () => {
 				<SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} gap={4}>
 					{filteredRoutes.map((route) => (
 						<Box
-							key={route.id}
+							key={route.name}
 							borderWidth={1}
 							borderRadius="2xl"
 							borderColor={borderColor}
