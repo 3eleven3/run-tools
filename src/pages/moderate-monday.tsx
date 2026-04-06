@@ -28,7 +28,6 @@ type ModerateMondayState = {
 	winner?: RouteItem;
 	selectedTags: string[];
 	distanceFilter: string;
-	elevationFilter: string;
 };
 
 const routes: RouteItem[] = [
@@ -66,19 +65,12 @@ const defaultState: ModerateMondayState = {
 	activeRoutes: routes,
 	selectedTags: [],
 	distanceFilter: "any",
-	elevationFilter: "any",
 };
 
 const getDistanceCategory = (distance: number) => {
 	if (distance < 5) return "short";
 	if (distance < 8) return "medium";
 	return "long";
-};
-
-const getElevationCategory = (elevation: number) => {
-	if (elevation < 200) return "low";
-	if (elevation < 400) return "moderate";
-	return "high";
 };
 
 export const ModerateMondays = () => {
@@ -100,19 +92,9 @@ export const ModerateMondays = () => {
 				state.distanceFilter === "any" ||
 				state.distanceFilter === distanceCategory;
 
-			const elevationCategory = getElevationCategory(route.elevation);
-			const matchElevation =
-				state.elevationFilter === "any" ||
-				state.elevationFilter === elevationCategory;
-
-			return matchTags && matchDistance && matchElevation;
+			return matchTags && matchDistance;
 		});
-	}, [
-		state.activeRoutes,
-		state.selectedTags,
-		state.distanceFilter,
-		state.elevationFilter,
-	]);
+	}, [state.activeRoutes, state.selectedTags, state.distanceFilter]);
 
 	const resetRoutes = () => {
 		setState(defaultState);
@@ -202,40 +184,6 @@ export const ModerateMondays = () => {
 										onClick={() =>
 											setState((draft) => {
 												draft.distanceFilter = option.value;
-											})
-										}
-									>
-										{option.label}
-									</Button>
-								))}
-							</HStack>
-						</Box>
-
-						<Box>
-							<Text fontSize="sm" fontWeight="bold" mb={2}>
-								Elevation
-							</Text>
-							<HStack wrap="wrap" gap={2}>
-								{[
-									{ label: "Any", value: "any" },
-									{ label: "Low (<200 ft)", value: "low" },
-									{ label: "Moderate (200-400 ft)", value: "moderate" },
-									{ label: "High (400+ ft)", value: "high" },
-								].map((option) => (
-									<Button
-										key={option.value}
-										size="sm"
-										variant={
-											state.elevationFilter === option.value
-												? "solid"
-												: "outline"
-										}
-										colorScheme={
-											state.elevationFilter === option.value ? "cyan" : "gray"
-										}
-										onClick={() =>
-											setState((draft) => {
-												draft.elevationFilter = option.value;
 											})
 										}
 									>
@@ -343,18 +291,12 @@ export const ModerateMondays = () => {
 						borderColor={borderColor}
 					>
 						<Stack gap={5} align="center">
-							<Badge colorScheme="green" px={3} py={1} fontSize="0.8rem">
-								Winner
-							</Badge>
 							<Heading size={{ base: "xl", md: "2xl" }} textAlign="center">
 								{state.winner.name}
 							</Heading>
 							<Text fontSize={{ base: "md", md: "lg" }} fontWeight="semibold">
 								{state.winner.distance.toFixed(1)} mi · {state.winner.elevation}{" "}
 								ft elev
-							</Text>
-							<Text fontSize="sm" color="gray.500" textAlign="center">
-								{state.winner.tags.join(" · ")}
 							</Text>
 							<Button
 								as="a"
