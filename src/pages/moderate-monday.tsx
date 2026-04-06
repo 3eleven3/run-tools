@@ -27,7 +27,6 @@ type ModerateMondayState = {
 	activeRoutes: RouteItem[];
 	winner?: RouteItem;
 	selectedTags: string[];
-	distanceFilter: string;
 };
 
 const routes: RouteItem[] = [
@@ -64,13 +63,6 @@ const routes: RouteItem[] = [
 const defaultState: ModerateMondayState = {
 	activeRoutes: routes,
 	selectedTags: [],
-	distanceFilter: "any",
-};
-
-const getDistanceCategory = (distance: number) => {
-	if (distance < 5) return "short";
-	if (distance < 8) return "medium";
-	return "long";
 };
 
 export const ModerateMondays = () => {
@@ -87,14 +79,9 @@ export const ModerateMondays = () => {
 				state.selectedTags.length === 0 ||
 				state.selectedTags.every((tag) => route.tags.includes(tag));
 
-			const distanceCategory = getDistanceCategory(route.distance);
-			const matchDistance =
-				state.distanceFilter === "any" ||
-				state.distanceFilter === distanceCategory;
-
-			return matchTags && matchDistance;
+			return matchTags;
 		});
-	}, [state.activeRoutes, state.selectedTags, state.distanceFilter]);
+	}, [state.activeRoutes, state.selectedTags]);
 
 	const resetRoutes = () => {
 		setState(defaultState);
@@ -142,10 +129,10 @@ export const ModerateMondays = () => {
 					onClick={pickRandomRoute}
 					disabled={filteredRoutes.length <= 1}
 				>
-					Start random pick
+					Pick random
 				</Button>
 				<Button onClick={resetRoutes} variant="outline">
-					Reset all routes
+					Reset filters
 				</Button>
 			</Stack>
 			<Box>
@@ -159,39 +146,6 @@ export const ModerateMondays = () => {
 					transition="all 0.35s ease"
 				>
 					<Stack gap={4}>
-						<Box>
-							<Text fontSize="sm" fontWeight="bold" mb={2}>
-								Distance
-							</Text>
-							<HStack wrap="wrap" gap={2}>
-								{[
-									{ label: "Any", value: "any" },
-									{ label: "Short (<5 mi)", value: "short" },
-									{ label: "Medium (5-8 mi)", value: "medium" },
-									{ label: "Long (8+ mi)", value: "long" },
-								].map((option) => (
-									<Button
-										key={option.value}
-										size="sm"
-										variant={
-											state.distanceFilter === option.value
-												? "solid"
-												: "outline"
-										}
-										colorScheme={
-											state.distanceFilter === option.value ? "cyan" : "gray"
-										}
-										onClick={() =>
-											setState((draft) => {
-												draft.distanceFilter = option.value;
-											})
-										}
-									>
-										{option.label}
-									</Button>
-								))}
-							</HStack>
-						</Box>
 						<Box>
 							<Text fontSize="sm" fontWeight="bold" mb={2}>
 								Tags
