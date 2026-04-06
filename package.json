@@ -17,7 +17,7 @@
 	"scripts": {
 		"build": "vite build",
 		"lint": "biome format --write && biome lint --fix",
-		"dev": "vite"
+		"dev": "IS_DEV=1 vite"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.3.11",

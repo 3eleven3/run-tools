@@ -10,6 +10,7 @@ import {
 	Tooltip,
 	ResponsiveContainer,
 } from "recharts";
+import { GarminCsvImporter } from "../components/garmin-csv";
 
 const tickInterval = 4;
 
@@ -62,99 +63,82 @@ export const CumulativeDistance: FC = () => {
 		"#22c55e",
 	];
 
-	const latestWeek = chartData[chartData.length - 1];
-	const averageCumulative =
-		years.length > 0 && latestWeek
-			? (() => {
-					let sum = 0;
-					let count = 0;
-					years.forEach((year) => {
-						const value = latestWeek[year];
-						if (value !== null && value !== undefined) {
-							const num = Number(value);
-							if (!Number.isNaN(num)) {
-								sum += num;
-								count += 1;
-							}
-						}
-					});
-					return count > 0 ? sum / count : 0;
-				})()
-			: 0;
-
 	return (
-		<Box w="100%">
-			<HStack gap={2} mb={4} w="100%" flexWrap="wrap">
-				<Text color="white" fontSize="sm" fontWeight="bold">
-					Years:
-				</Text>
-				{allYears.map((year, idx) => {
-					const isActive = activeYears.includes(year);
-					return (
-						<Button
-							key={year}
-							size="xs"
-							variant={isActive ? "solid" : "outline"}
-							colorScheme={isActive ? "teal" : "gray"}
-							onClick={() => toggleYear(year)}
-						>
-							{year}
-						</Button>
-					);
-				})}
-				<Button size="xs" onClick={resetFilters} ml="auto">
-					Reset
-				</Button>
-			</HStack>
-			<ResponsiveContainer width="100%" height={340}>
-				<LineChart
-					data={chartData}
-					margin={{ top: 10, right: 24, left: 0, bottom: 10 }}
-				>
-					<CartesianGrid strokeDasharray="3 3" stroke="#fff" opacity={0.2} />
-					<XAxis
-						dataKey="week"
-						tick={{ fill: "#fff", fontSize: 11 }}
-						interval={tickInterval}
-						tickFormatter={(v) => String(v)}
-						axisLine={{ stroke: "#fff" }}
-						tickLine={false}
-					/>
-					<YAxis
-						tick={{ fill: "#fff", fontSize: 11 }}
-						axisLine={false}
-						tickLine={false}
-						tickFormatter={(v) => `${v}mi`}
-					/>
-					<Tooltip
-						content={({ active, payload, label }) => {
-							if (active && payload && payload.length > 0) {
-								const entry = payload[0];
-								return (
-									<Box p={2} borderRadius="md">
-										<Box fontWeight="bold">Week: {label}</Box>
-										<Box fontSize="sm">
-											{entry.name}: {(Number(entry.value) || 0).toFixed(2)} mi
-										</Box>
-									</Box>
-								);
-							}
-							return null;
-						}}
-					/>
-					{years.map((year, idx) => (
-						<Line
-							key={year}
-							type="monotone"
-							dataKey={year}
-							stroke={yearColors[idx % yearColors.length]}
-							strokeWidth={2}
-							dot={false}
-							activeDot={{ r: 6, fill: "#fff", strokeWidth: 2 }}
+		<>
+			<GarminCsvImporter />
+			<Box w="100%">
+				<HStack gap={2} mb={4} w="100%" flexWrap="wrap">
+					<Text color="white" fontSize="sm" fontWeight="bold">
+						Years:
+					</Text>
+					{allYears.map((year, _idx) => {
+						const isActive = activeYears.includes(year);
+						return (
+							<Button
+								key={year}
+								size="xs"
+								variant={isActive ? "solid" : "outline"}
+								colorScheme={isActive ? "teal" : "gray"}
+								onClick={() => toggleYear(year)}
+							>
+								{year}
+							</Button>
+						);
+					})}
+					<Button size="xs" onClick={resetFilters} ml="auto">
+						Reset
+					</Button>
+				</HStack>
+				<ResponsiveContainer width="100%" height={340}>
+					<LineChart
+						data={chartData}
+						margin={{ top: 10, right: 24, left: 0, bottom: 10 }}
+					>
+						<CartesianGrid strokeDasharray="3 3" stroke="#fff" opacity={0.2} />
+						<XAxis
+							dataKey="week"
+							tick={{ fill: "#fff", fontSize: 11 }}
+							interval={tickInterval}
+							tickFormatter={(v) => String(v)}
+							axisLine={{ stroke: "#fff" }}
+							tickLine={false}
 						/>
-					))}
-				</LineChart>
-			</ResponsiveContainer>
-		</Box>
+						<YAxis
+							tick={{ fill: "#fff", fontSize: 11 }}
+							axisLine={false}
+							tickLine={false}
+							tickFormatter={(v) => `${v}mi`}
+						/>
+						<Tooltip
+							content={({ active, payload, label }) => {
+								if (active && payload && payload.length > 0) {
+									const entry = payload[0];
+									return (
+										<Box p={2} borderRadius="md">
+											<Box fontWeight="bold">Week: {label}</Box>
+											<Box fontSize="sm">
+												{entry.name}: {(Number(entry.value) || 0).toFixed(2)} mi
+											</Box>
+										</Box>
+									);
+								}
+								return null;
+							}}
+						/>
+						{years.map((year, idx) => (
+							<Line
+								key={year}
+								type="monotone"
+								dataKey={year}
+								stroke={yearColors[idx % yearColors.length]}
+								strokeWidth={2}
+								dot={false}
+								activeDot={{ r: 6, fill: "#fff", strokeWidth: 2 }}
+							/>
+						))}
+					</LineChart>
+				</ResponsiveContainer>
+			</Box>
+		</>
 	);
 };

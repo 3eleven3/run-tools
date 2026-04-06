@@ -8,6 +8,7 @@ const defaultState: AppState = {
 	events,
 	isMobile: false,
 	data: null,
+	page: "",
 };
 
 const AppContext = createContext<{
@@ -29,6 +30,15 @@ export const AppProvider: FCWithChildren = (props) => {
 			draft.isMobile = isMobile;
 		});
 	}, [isMobile, setState]);
+
+	// update the page to the query param on load
+	useEffect(() => {
+		const params = new URLSearchParams(window.location.search);
+		const page = params.get("page") ?? "home";
+		setState((draft) => {
+			draft.page = page;
+		});
+	}, [setState]);
 
 	return (
 		<AppContext.Provider value={{ state, setState }}>

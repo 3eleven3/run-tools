@@ -1,11 +1,13 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
+const isDev = process.env.IS_DEV === "1";
+
 // https://vite.dev/config/
 export default defineConfig({
 	plugins: [react()],
 	// required for github pages
-	base: "/run-tools/",
+	base: isDev ? undefined : "/run-tools/",
 	server: {
 		host: "0.0.0.0",
 		port: 5000,

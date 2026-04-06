@@ -30,6 +30,22 @@
       html:not(.dark) #init-loading { color: #475569; } /* darker text when light */
       /* Hide the overlay once we add the ready class */
       html.ready #init-loading { display: none; }
+
+      @keyframes winner-unblur {
+        from {
+          filter: blur(20px);
+          opacity: 0.88;
+        }
+        to {
+          filter: blur(0px);
+          opacity: 1;
+        }
+      }
+
+      .winner-modal-card {
+        animation: winner-unblur 1.8s ease forwards;
+        will-change: filter, opacity;
+      }
     </style>
 
     <!-- Inline script: set theme class (dark/light) and a basic mobile class early -->

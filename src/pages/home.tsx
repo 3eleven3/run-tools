@@ -1,39 +1,26 @@
-import { Box, Heading, VStack, Tabs } from "@chakra-ui/react";
+import { useEffect, useMemo, useState } from "react";
+import { Box, Heading, Tabs, VStack, Text, Loader } from "@chakra-ui/react";
 import { GarminCsvImporter } from "../components/garmin-csv";
 import { useAppState } from "..//state";
 import { CumulativeDistance } from "./cumulative-distance";
+import { ModerateMondays } from "./moderate-monday";
 
 export const Home = () => {
 	const { state } = useAppState();
 
-	return (
-		<VStack gap={4} align="center" py={10}>
-			<Heading as="h1" size="2xl">
-				Run Tools
-			</Heading>
-			<Box w="100%" maxW="6xl">
-				<GarminCsvImporter />
-			</Box>
-			{state.data && (
-				<Box w="100%" maxW="6xl">
-					<Tabs.Root defaultValue="home" variant="outline">
-						<Tabs.List>
-							<Tabs.Trigger value="home">Home</Tabs.Trigger>
-							<Tabs.Trigger value="cumulative-distance">
-								Cumulative Distance
-							</Tabs.Trigger>
-						</Tabs.List>
-						<Box p={2}>
-							<Tabs.Content value="home">
-								Imported {state.data.activityCount} activities.
-							</Tabs.Content>
-							<Tabs.Content value="cumulative-distance">
-								<CumulativeDistance />
-							</Tabs.Content>
-						</Box>
-					</Tabs.Root>
-				</Box>
-			)}
-		</VStack>
-	);
+	if (state.page === "") {
+		return <Loader />;
+	}
+
+	if (state.page === "home") {
+		return <>hi</>;
+	}
+
+	if (state.page === "cumulative-distance") {
+		return <CumulativeDistance />;
+	}
+
+	if (state.page === "moderate-monday") {
+		return <ModerateMondays />;
+	}
 };

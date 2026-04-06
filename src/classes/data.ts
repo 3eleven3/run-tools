@@ -149,7 +149,9 @@ export class Data {
 
 		const allWeeks = new Set<number>();
 		Object.values(milesByYearWeek).forEach((weeks) => {
-			Object.keys(weeks).forEach((week) => allWeeks.add(Number(week)));
+			Object.keys(weeks).forEach((week) => {
+				allWeeks.add(Number(week));
+			});
 		});
 
 		const maxWeek = allWeeks.size === 0 ? 0 : Math.max(...Array.from(allWeeks));

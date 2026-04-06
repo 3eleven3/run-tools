@@ -6,6 +6,7 @@ export type AppState = {
 	isMobile: boolean;
 	readonly events: Event[];
 	data: Data | null;
+	page: string;
 };
 
 // biome-ignore lint/complexity/noBannedTypes: React stuff
