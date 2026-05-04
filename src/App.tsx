@@ -1,6 +1,7 @@
 import { Container, Box } from "@chakra-ui/react";
 import { ColorModeButton } from "./components/ui/color-mode";
-import { Home } from "./pages/home";
+import { getPage } from "./utils";
+import { pageMap } from "./__generated__/pages";
 
 export const App = () => {
 	return (
@@ -13,7 +14,7 @@ export const App = () => {
 		>
 			<ColorModeButton position="absolute" top={4} right={4} />
 			<Container w="100%" py={{ base: 4, md: 10 }} px={{ base: 2, md: 4 }}>
-				<Home />
+				{pageMap[getPage()]}
 			</Container>
 		</Box>
 	);

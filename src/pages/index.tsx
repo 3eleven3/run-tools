@@ -1,10 +1,7 @@
-import { Box, Heading, VStack, Tabs } from "@chakra-ui/react";
-import { GarminCsvImporter } from "../components/garmin-csv";
-import { useAppState } from "..//state";
-import { CumulativeDistance } from "./cumulative-distance";
-import { ModerateMondays } from "./moderate-mondays";
+import { Heading, VStack, Tabs } from "@chakra-ui/react";
+import { useAppState } from "../state";
 
-export const Home = () => {
+const Index = () => {
 	const { state } = useAppState();
 
 	return (
@@ -12,7 +9,7 @@ export const Home = () => {
 			<Heading as="h1" size="2xl">
 				Run Tools
 			</Heading>
-			<Box w="100%" maxW="6xl">
+			{/* <Box w="100%" maxW="6xl">
 				<GarminCsvImporter />
 			</Box>
 			{state.data && (
@@ -40,7 +37,9 @@ export const Home = () => {
 						</Box>
 					</Tabs.Root>
 				</Box>
-			)}
+			)} */}
 		</VStack>
 	);
 };
+
+export default Index;

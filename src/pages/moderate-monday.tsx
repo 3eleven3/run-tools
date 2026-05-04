@@ -72,7 +72,7 @@ const defaultState: ModerateMondayState = {
 	selectedTags: [],
 };
 
-export const ModerateMondays = () => {
+const ModerateMondays = () => {
 	const [state, setState] = useImmer<ModerateMondayState>(defaultState);
 
 	const tags = useMemo(
@@ -277,3 +277,5 @@ export const ModerateMondays = () => {
 		</VStack>
 	);
 };
+
+export default ModerateMondays;

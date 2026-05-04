@@ -14,7 +14,7 @@ import { GarminCsvImporter } from "../components/garmin-csv";
 
 const tickInterval = 4;
 
-export const CumulativeDistance: FC = () => {
+const CumulativeDistance: FC = () => {
 	const { state, setState } = useAppState();
 	const { data: chartData, years } = state.data
 		?.filteredCumulativeMilesByYear ?? {
@@ -142,3 +142,5 @@ export const CumulativeDistance: FC = () => {
 		</>
 	);
 };
+
+export default CumulativeDistance;

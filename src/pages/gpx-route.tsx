@@ -183,6 +183,7 @@ const adjustOverlapRadii = (points: OverlapPoint[]) => {
 	while (iteration < maxIterations) {
 		const parent = adjusted.map((_, index) => index);
 		const find = (index: number): number =>
+			// biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
 			parent[index] === index ? index : (parent[index] = find(parent[index]));
 		const union = (a: number, b: number) => {
 			const rootA = find(a);
@@ -282,7 +283,10 @@ const serializeIntersections = (points: OverlapPoint[]) => {
 				point.lon.toFixed(6),
 				point.radiusMeters.toFixed(1),
 				String(point.exits.length),
-				...point.exits.flatMap((exit) => [exit.lat.toFixed(6), exit.lon.toFixed(6)]),
+				...point.exits.flatMap((exit) => [
+					exit.lat.toFixed(6),
+					exit.lon.toFixed(6),
+				]),
 			];
 			return record.join(" ");
 		})
@@ -540,7 +544,7 @@ const defaultGPXRouteState: GPXRouteState = {
 	error: null,
 };
 
-export const GPXRouteInspector = () => {
+const GPXRouteInspector = () => {
 	const [state, setState] = useImmer<GPXRouteState>(defaultGPXRouteState);
 	const { routeName, routePoints, overlapPoints, error } = state;
 
@@ -716,3 +720,5 @@ export const GPXRouteInspector = () => {
 		</Stack>
 	);
 };
+
+export default GPXRouteInspector;
