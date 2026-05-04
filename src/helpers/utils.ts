@@ -1,4 +1,4 @@
-import { type Page, pages } from "./__generated__/pages";
+import { type Page, pages } from "../__generated__/pages";
 
 export const kmToMiles = (km: number) => {
 	return km * 0.621371;

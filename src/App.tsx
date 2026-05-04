@@ -1,6 +1,6 @@
 import { Container, Box } from "@chakra-ui/react";
 import { ColorModeButton } from "./components/ui/color-mode";
-import { getPage } from "./utils";
+import { getPage } from "./helpers/utils";
 import { pageMap } from "./__generated__/pages";
 
 export const App = () => {
