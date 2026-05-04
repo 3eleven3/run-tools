@@ -1,3 +1,5 @@
 /examples
 /node_modules
 .DS_Store
+crossoverhelper/developer_key
+crossoverhelper/bin/

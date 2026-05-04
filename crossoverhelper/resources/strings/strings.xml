@@ -1,0 +1,7 @@
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
+    <string id="AppName">cross over helper</string>
+
+    <string id="label">My Value</string>
+    <string id="SETTINGS_PAYLOAD_STRING">Route payload string</string>
+    <string id="SETTINGS_PAYLOAD_STRING_DESC">Paste the route payload text from the website here</string>
+</strings>
