@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "leaflet/dist/leaflet.css";
 import { App } from "./App";
 import { Provider } from "./components/ui/provider";
-import { AppProvider } from "./state";
+import { AppProvider } from "./components/state";
 
 // biome-ignore lint/style/noNonNullAssertion: it's fine here
 createRoot(document.getElementById("root")!).render(

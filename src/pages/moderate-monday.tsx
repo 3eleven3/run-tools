@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useImmer } from "use-immer";
 import {
 	Badge,
@@ -73,6 +73,11 @@ const defaultState: ModerateMondayState = {
 };
 
 const ModerateMondays = () => {
+	// set the page title
+	useEffect(() => {
+		document.title = "Moderate Monday";
+	}, []);
+
 	const [state, setState] = useImmer<ModerateMondayState>(defaultState);
 
 	const tags = useMemo(
@@ -261,7 +266,7 @@ const ModerateMondays = () => {
 							<Button
 								as="a"
 								onClick={() => {
-									window.open(state.winner.gpxUrl, "_blank");
+									state.winner && window.open(state.winner.gpxUrl, "_blank");
 								}}
 								rel="noreferrer"
 								size="lg"

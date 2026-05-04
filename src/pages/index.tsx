@@ -1,5 +1,5 @@
 import { Heading, VStack, Tabs } from "@chakra-ui/react";
-import { useAppState } from "../state";
+import { useAppState } from "../components/state";
 
 const Index = () => {
 	const { state } = useAppState();

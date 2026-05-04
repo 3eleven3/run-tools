@@ -1,12 +1,11 @@
 import type { FC, PropsWithChildren } from "react";
-import type { Event } from "./events";
-import type { Data } from "./classes/data";
+import type { Event } from "../statics/events";
+import type { Data } from "../classes/data";
 
 export type AppState = {
 	isMobile: boolean;
 	readonly events: Event[];
 	data: Data | null;
-	page: string;
 };
 
 // biome-ignore lint/complexity/noBannedTypes: React stuff

@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { Box, Heading, Text } from "@chakra-ui/react";
-import { useAppState } from "../state";
+import { useAppState } from "./state";
 import { Data } from "../classes/data";
 
 const parseCsv = (csvText: string) => {

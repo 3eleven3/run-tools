@@ -1,5 +1,5 @@
 import { Box, Button, HStack, Text } from "@chakra-ui/react";
-import { useAppState } from "../state";
+import { useAppState } from "../components/state";
 import type { FC } from "react";
 import {
 	LineChart,

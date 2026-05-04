@@ -1,14 +1,13 @@
 import { createContext, useContext, useEffect } from "react";
-import type { AppState, FCWithChildren } from "./types";
+import type { AppState, FCWithChildren } from "../helpers/types";
 import { type Updater, useImmer } from "use-immer";
-import { events } from "./events";
+import { events } from "../statics/events";
 import { useMediaQuery } from "usehooks-ts";
 
 const defaultState: AppState = {
 	events,
 	isMobile: false,
 	data: null,
-	page: "",
 };
 
 const AppContext = createContext<{
@@ -30,15 +29,6 @@ export const AppProvider: FCWithChildren = (props) => {
 			draft.isMobile = isMobile;
 		});
 	}, [isMobile, setState]);
-
-	// update the page to the query param on load
-	useEffect(() => {
-		const params = new URLSearchParams(window.location.search);
-		const page = params.get("page") ?? "home";
-		setState((draft) => {
-			draft.page = page;
-		});
-	}, [setState]);
 
 	return (
 		<AppContext.Provider value={{ state, setState }}>
