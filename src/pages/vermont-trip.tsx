@@ -226,6 +226,11 @@ const VermontTrip: FC = () => {
 						icon: <LuFastForward />,
 						description: "Group road run - 6 miles - Route TBD",
 					},
+					{
+						time: "12 PM",
+						icon: <LuShip />,
+						description: "Check-out time",
+					},
 				]}
 			/>
 		</VStack>
