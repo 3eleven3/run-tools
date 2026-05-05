@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { useEffect, type FC } from "react";
 import {
 	Badge,
 	Box,
@@ -8,7 +8,7 @@ import {
 	Text,
 	Link,
 	Card,
-	Heading,
+	Portal,
 } from "@chakra-ui/react";
 import { useColorModeValue } from "../components/ui/color-mode";
 import {
@@ -18,6 +18,7 @@ import {
 	LuPlay,
 	LuShip,
 } from "react-icons/lu";
+import { Popover } from "@chakra-ui/react";
 
 const Day: FC<{
 	title: string;
@@ -71,6 +72,10 @@ const Day: FC<{
 };
 
 const VermontTrip: FC = () => {
+	useEffect(() => {
+		document.title = "Vermont Trip Information";
+	}, []);
+
 	return (
 		<VStack gap={8}>
 			<Box fontSize={"4xl"} fontWeight={"bold"} fontFamily={"heading"}>
@@ -180,7 +185,19 @@ const VermontTrip: FC = () => {
 					{
 						time: "9 AM",
 						icon: <LuFastForward />,
-						description: "Trail run - ??? miles - Route TBD",
+						description: (
+							<HStack>
+								Trail run - 7.5mi or 15mi
+								<Link
+									target="_blank"
+									href="https://maps.app.goo.gl/BpZ3Xn3rUFcnLsk27"
+									fontSize="1rem"
+									color={useColorModeValue("blue.600", "blue.300")}
+								>
+									@ Chittenden Reservoir
+								</Link>
+							</HStack>
+						),
 					},
 					{
 						time: "4 PM",
