@@ -190,7 +190,7 @@ const VermontTrip: FC = () => {
 								Trail run - 7.5mi or 15mi
 								<Link
 									target="_blank"
-									href="https://maps.app.goo.gl/BpZ3Xn3rUFcnLsk27"
+									href="https://connect.garmin.com/modern/course/458050331"
 									fontSize="1rem"
 									color={useColorModeValue("blue.600", "blue.300")}
 								>
