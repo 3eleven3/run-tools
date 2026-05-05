@@ -19,16 +19,6 @@ import {
 	LuShip,
 } from "react-icons/lu";
 
-// Saturday
-// group hike starts at 8 am
-// trail run 10 am
-
-// Sunday
-// group covered bridges road run 6 ish miles
-
-// Breakfast
-// feel free to bring something to share like coffee cake, muffins, bagels, beverages,quiche etc or make your own in the shared kitchen. We will need someone to bring coffee and cream/sugar ( can you make a sign up link so people can write what they are bringing?)
-
 const Day: FC<{
 	title: string;
 	events: Array<{
@@ -111,10 +101,20 @@ const VermontTrip: FC = () => {
 			</HStack>
 			<Card.Root size="sm" maxWidth={"600px"}>
 				<Card.Body color="fg.muted">
+					Remember to check the group chat for any last minute updates or
+					changes to the schedule.
+					<br />
+					<br />
 					The schedule is just the organized activities that we've planned.
 					You're welcome to deviate or make your own plans as you see fit. The
 					house has a shared kitchen if you want to make your own meals, and
 					there are plenty of great restaurants in the area.
+					<br />
+					<br />
+					For breakfast, feel free to bring something to share like coffee cake,
+					muffins, bagels, beverages, quiche, etc or make your own in the shared
+					kitchen. We'll organize coffee but please bring cream/sugar if you
+					need it.
 				</Card.Body>
 			</Card.Root>
 			<Day
@@ -138,7 +138,7 @@ const VermontTrip: FC = () => {
 					{
 						time: "6 PM",
 						icon: <LuFastForward />,
-						description: "Group run - 5 miles",
+						description: "Group run - 5 miles - Route TBD",
 					},
 					{
 						time: "",
@@ -148,7 +148,7 @@ const VermontTrip: FC = () => {
 					{
 						time: "",
 						icon: <LuPlay />,
-						description: "Group walk - 3 miles",
+						description: "Group walk - 3 miles - Route TBD",
 					},
 					{
 						time: "7 PM",
@@ -175,12 +175,12 @@ const VermontTrip: FC = () => {
 					{
 						time: "8 AM",
 						icon: <LuPlay />,
-						description: "Group hike - ??? miles",
+						description: "Group hike - ??? miles - Route TBD",
 					},
 					{
 						time: "9 AM",
 						icon: <LuFastForward />,
-						description: "Trail run - 8 miles",
+						description: "Trail run - ??? miles - Route TBD",
 					},
 					{
 						time: "4 PM",
@@ -207,7 +207,7 @@ const VermontTrip: FC = () => {
 					{
 						time: "8 AM",
 						icon: <LuFastForward />,
-						description: "Group road run - 6 miles",
+						description: "Group road run - 6 miles - Route TBD",
 					},
 				]}
 			/>
