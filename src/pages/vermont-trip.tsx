@@ -120,6 +120,14 @@ const VermontTrip: FC = () => {
 					muffins, bagels, beverages, quiche, etc or make your own in the shared
 					kitchen. We'll organize coffee but please bring cream/sugar if you
 					need it.
+					<Link
+						target="_blank"
+						href="https://forms.gle/Nw89AfRCaJYaoDdz5"
+						fontSize="1rem"
+						color={useColorModeValue("blue.600", "blue.300")}
+					>
+						Breakfast sharing sign-up
+					</Link>
 				</Card.Body>
 			</Card.Root>
 			<Day
@@ -224,7 +232,20 @@ const VermontTrip: FC = () => {
 					{
 						time: "8 AM",
 						icon: <LuFastForward />,
-						description: "Group road run - 6 miles - Route TBD",
+						// description: "Group road run - 6 miles - Route TBD",
+						description: (
+							<HStack>
+								Group road run - 6 miles
+								<Link
+									target="_blank"
+									href="https://strava.app.link/7XH2SWnWU2b"
+									fontSize="1rem"
+									color={useColorModeValue("blue.600", "blue.300")}
+								>
+									@ Pittsford
+								</Link>
+							</HStack>
+						),
 					},
 					{
 						time: "12 PM",
