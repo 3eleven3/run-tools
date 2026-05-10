@@ -288,6 +288,11 @@ const VermontTrip: FC = () => {
 						),
 					},
 					{
+						time: "",
+						icon: null,
+						description: <Text fontSize="1rem">or</Text>,
+					},
+					{
 						time: "8 AM",
 						icon: <LuFastForward />,
 						description: (
@@ -303,6 +308,11 @@ const VermontTrip: FC = () => {
 								</Link>
 							</HStack>
 						),
+					},
+					{
+						time: "",
+						icon: null,
+						description: <Text fontSize="1rem">or</Text>,
 					},
 					{
 						time: "8 AM",
