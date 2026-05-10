@@ -8,7 +8,7 @@ import {
 	Text,
 	Link,
 	Card,
-	Portal,
+	Table,
 } from "@chakra-ui/react";
 import { useColorModeValue } from "../components/ui/color-mode";
 import {
@@ -18,7 +18,26 @@ import {
 	LuPlay,
 	LuShip,
 } from "react-icons/lu";
-import { Popover } from "@chakra-ui/react";
+
+const TableRow: FC<{
+	room: string;
+	occupants: string[];
+}> = (props) => {
+	return (
+		<Table.Row>
+			<Table.Cell verticalAlign="top">
+				<b>{props.room}</b>
+			</Table.Cell>
+			<Table.Cell>
+				<VStack alignItems="start">
+					{props.occupants.map((occupant) => (
+						<Text key={occupant}>{occupant}</Text>
+					))}
+				</VStack>
+			</Table.Cell>
+		</Table.Row>
+	);
+};
 
 const Day: FC<{
 	title: string;
@@ -94,6 +113,16 @@ const VermontTrip: FC = () => {
 					Directions
 				</Button>
 				<Button
+					colorPalette="yellow"
+					size="xl"
+					variant="surface"
+					as="a"
+					// @ts-expect-error - we're using it as a link
+					href="#room-assignments"
+				>
+					Room assignments
+				</Button>
+				<Button
 					colorPalette="red"
 					size="xl"
 					variant="surface"
@@ -104,6 +133,12 @@ const VermontTrip: FC = () => {
 					Questions?
 				</Button>
 			</HStack>
+			<Box
+				borderColor={useColorModeValue("gray.400", "gray.600")}
+				borderWidth={1}
+				borderStyle="solid"
+				width="80%"
+			/>
 			<Card.Root size="sm" maxWidth={"600px"}>
 				<Card.Body color="fg.muted">
 					Remember to check the group chat for any last minute updates or
@@ -130,6 +165,12 @@ const VermontTrip: FC = () => {
 					</Link>
 				</Card.Body>
 			</Card.Root>
+			<Box
+				borderColor={useColorModeValue("gray.400", "gray.600")}
+				borderWidth={1}
+				borderStyle="solid"
+				width="80%"
+			/>
 			<Day
 				title="Thursday - May 14th"
 				events={[
@@ -253,6 +294,52 @@ const VermontTrip: FC = () => {
 						description: "Check-out time",
 					},
 				]}
+			/>
+			<Box
+				borderColor={useColorModeValue("gray.400", "gray.600")}
+				borderWidth={1}
+				borderStyle="solid"
+				width="80%"
+			/>
+			<Box id="room-assignments">
+				<Text fontSize="1.5rem" marginBlockEnd={4} textAlign="center">
+					<b>Room assignments</b>
+				</Text>
+				<Table.Root
+					size={"lg"}
+					striped
+					borderWidth={1}
+					borderColor={useColorModeValue("gray.400", "gray.700")}
+					minWidth="400px"
+				>
+					<Table.Body>
+						<TableRow room="Room 20" occupants={["Lucy", "Hadley"]} />
+						<TableRow room="Room 21" occupants={["Kelly", "Peter"]} />
+						<TableRow room="Room 22" occupants={["Jen Murray", "Roman"]} />
+						<TableRow room="Room 23" occupants={["Allison"]} />
+						<TableRow room="Room 23a" occupants={["Clara"]} />
+						<TableRow room="Room 25" occupants={["Rebecca R"]} />
+						<TableRow room="Room 26" occupants={["Steve"]} />
+						<TableRow room="Room 27" occupants={["Alexandra", "Husband"]} />
+						<TableRow room="Room 30" occupants={["Jane"]} />
+						<TableRow
+							room="Room 31"
+							occupants={["Mae", "Gina", "Pat", "Lori"]}
+						/>
+						<TableRow room="Room 32" occupants={["Trish V"]} />
+						<TableRow room="Room 33" occupants={["Cam", "Emma", "Bernard"]} />
+						<TableRow
+							room="Dorm"
+							occupants={["Jennifer Bliss", "Husband", "Child", "Child"]}
+						/>
+					</Table.Body>
+				</Table.Root>
+			</Box>
+			<Box
+				borderColor={useColorModeValue("gray.400", "gray.600")}
+				borderWidth={1}
+				borderStyle="solid"
+				width="80%"
 			/>
 		</VStack>
 	);
