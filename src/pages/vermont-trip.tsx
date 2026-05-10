@@ -273,13 +273,46 @@ const VermontTrip: FC = () => {
 					{
 						time: "8 AM",
 						icon: <LuFastForward />,
-						// description: "Group road run - 6 miles - Route TBD",
 						description: (
 							<HStack>
-								Group road run - 6 miles
+								Group road run - 4.7 mi
 								<Link
 									target="_blank"
-									href="https://strava.app.link/7XH2SWnWU2b"
+									href="https://connect.garmin.com/modern/course/459849807"
+									fontSize="1rem"
+									color={useColorModeValue("blue.600", "blue.300")}
+								>
+									@ Pittsford
+								</Link>
+							</HStack>
+						),
+					},
+					{
+						time: "8 AM",
+						icon: <LuFastForward />,
+						description: (
+							<HStack>
+								Group road run - 6.4 mi
+								<Link
+									target="_blank"
+									href="https://connect.garmin.com/modern/course/459849831"
+									fontSize="1rem"
+									color={useColorModeValue("blue.600", "blue.300")}
+								>
+									@ Pittsford
+								</Link>
+							</HStack>
+						),
+					},
+					{
+						time: "8 AM",
+						icon: <LuFastForward />,
+						description: (
+							<HStack>
+								Group road run - 8.1 mi
+								<Link
+									target="_blank"
+									href="https://connect.garmin.com/modern/course/459849843"
 									fontSize="1rem"
 									color={useColorModeValue("blue.600", "blue.300")}
 								>
