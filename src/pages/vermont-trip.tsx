@@ -229,7 +229,7 @@ const VermontTrip: FC = () => {
 					{
 						time: "8 AM",
 						icon: <LuPlay />,
-						description: "Group hike - ??? miles - Route TBD",
+						description: "Group hike - 4 hours",
 					},
 					{
 						time: "9 AM",
