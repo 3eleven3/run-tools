@@ -360,16 +360,13 @@ const VermontTrip: FC = () => {
 						<TableRow room="Room 21" occupants={["Kelly", "Peter"]} />
 						<TableRow room="Room 22" occupants={["Jen Murray", "Roman"]} />
 						<TableRow room="Room 23" occupants={["Allison"]} />
-						<TableRow room="Room 23a" occupants={["Clara"]} />
-						<TableRow room="Room 25" occupants={["Rebecca R"]} />
+						<TableRow room="Room 23a" occupants={[]} />
+						<TableRow room="Room 25" occupants={["Clara"]} />
 						<TableRow room="Room 26" occupants={["Steve"]} />
 						<TableRow room="Room 27" occupants={["Alexandra", "Husband"]} />
 						<TableRow room="Room 30" occupants={["Jane"]} />
-						<TableRow
-							room="Room 31"
-							occupants={["Mae", "Gina", "Pat", "Lori"]}
-						/>
-						<TableRow room="Room 32" occupants={["Trish V"]} />
+						<TableRow room="Room 31" occupants={["Mae", "Pat", "Lori"]} />
+						<TableRow room="Room 32" occupants={[]} />
 						<TableRow room="Room 33" occupants={["Cam", "Emma", "Bernard"]} />
 						<TableRow
 							room="Dorm"
