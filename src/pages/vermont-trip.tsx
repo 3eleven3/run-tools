@@ -9,6 +9,7 @@ import {
 	Link,
 	Card,
 	Table,
+	Heading,
 } from "@chakra-ui/react";
 import { useColorModeValue } from "../components/ui/color-mode";
 import {
@@ -18,6 +19,154 @@ import {
 	LuPlay,
 	LuShip,
 } from "react-icons/lu";
+
+const faqs: { title: string; answer: string }[] = [
+	{
+		title: "When is check-in?",
+		answer: "Check-in is after 4:00 PM on Thursday or anytime Friday.",
+	},
+	{
+		title: "When is check-out?",
+		answer: "Check-out is by 12:00 PM on Sunday.",
+	},
+	{
+		title: "What is the address of the house?",
+		answer: "The address is 3692 Route 7 North, Pittsford, VT 05763.",
+	},
+	{
+		title: "What is the door code to enter the house?",
+		answer: "The entrance is through the side door and the code is 1936.",
+	},
+	{
+		title: "Where can I find my room assignment?",
+		answer:
+			"In the room assignments section of the trip website. The rooms are labeled on the map and there is a table with the room numbers and occupants listed.",
+	},
+	{
+		title: "What is the Wi-Fi password?",
+		answer:
+			"The Wi-Fi password is 'teleskiclub2020'. It is also written on the kitchen bulletin board.",
+	},
+	{
+		title: "Are there TVs at the house?",
+		answer:
+			"No, there are no TVs. Bring your own devices if you want entertainment for the weekend.",
+	},
+	{
+		title: "Are linens, sheets, and blankets provided?",
+		answer:
+			"Yes, sheets, pillows, and blankets are provided. Extra blankets are available if needed.",
+	},
+	{
+		title: "Do I need to bring my own towels?",
+		answer: "Yes, you must bring your own towels and washcloths.",
+	},
+	{
+		title: "What toiletries are provided?",
+		answer:
+			"Body wash is provided in all bathrooms. You must bring all other personal toiletries.",
+	},
+	{
+		title: "Where can I store my food?",
+		answer:
+			"Use the large refrigerator in the kitchen for food. Shared condiments are available inside.",
+	},
+	{
+		title: "Where can I store my drinks and beverages?",
+		answer:
+			"Use the second refrigerator located in the great room specifically for beverages.",
+	},
+	{
+		title: "How do I use the kitchen stove and burners?",
+		answer:
+			"The stove burners must be lit manually with a lighter. Ask Kelly if you need assistance.",
+	},
+	{
+		title: "Can I use the large kitchen griddle?",
+		answer:
+			"Yes, but you must talk to Kelly first for specific operational instructions.",
+	},
+	{
+		title: "How do we handle the dishes and dishwasher?",
+		answer:
+			"The dishwasher is restaurant grade and requires specific instructions. Put utensils in the soapy basin, fill the racks, and run a load after breakfast and dinner.",
+	},
+	{
+		title: "What are the expectations for kitchen cleanup?",
+		answer:
+			"Please clean up after yourself, wipe down any counters you use, and do your own dishes.",
+	},
+	{
+		title: "How does the Friday potluck work?",
+		answer:
+			"There is a potluck on Friday night. Please sign up and add to the food lists on the trip website at github.io.",
+	},
+	{
+		title: "How does breakfast work?",
+		answer:
+			"Breakfast involves food sharing. You can sign up on the website to bring items to share like coffee cake, muffins, bagels, quiche, or beverages, or make your own food in the shared kitchen.",
+	},
+	{
+		title: "Is coffee provided?",
+		answer:
+			"Kelly will brew a pot of coffee every morning as soon as she wakes up. You are also welcome to make a fresh pot anytime. Please bring your own cream and sugar if you need it.",
+	},
+	{
+		title: "Do I have to follow the group schedule?",
+		answer:
+			"No. The schedule only covers organized group activities. You are welcome to deviate, make your own plans, cook your own meals, or eat out.",
+	},
+	{
+		title: "How do I join the group text chat?",
+		answer:
+			"Kelly is creating a group text. Send her your phone number to be added, or let her know if you prefer to opt out.",
+	},
+	{
+		title: "What do I need to do to my bed before check-out?",
+		answer:
+			"Strip the sheets and pillowcase and place them in a laundry bag in the mudroom. Fold your blankets and leave them at the end of the bed.",
+	},
+	{
+		title: "What clean-up is required before leaving on Sunday?",
+		answer:
+			"Do your dishes, throw away your garbage, wipe up any stains, and sweep up crumbs.",
+	},
+	{
+		title: "Where is the closest grocery store?",
+		answer:
+			"Kamuda's Country Market is highly recommended, very close to the house, and offers groceries, sandwiches, and to-go food.",
+	},
+	{
+		title: "Is there a larger supermarket nearby?",
+		answer:
+			"Yes, there is a Hannaford supermarket located roughly 10 minutes away in the next town of Brandon, VT.",
+	},
+	{
+		title: "What restaurants are recommended nearby?",
+		answer:
+			"Recommended spots include River Pub and Grill (Brandon), Cafe Provence (Brandon), Franklin's (Proctor), and Hop 'N Moose (West Rutland).",
+	},
+	{
+		title: "What is there to do in the area when not running or hiking?",
+		answer:
+			"You can explore shops and eateries in Downtown Rutland, browse the large antique shop and bakery in Brandon, visit Killington, or rent kayaks at Branbury State Park.",
+	},
+	{
+		title: "What is the weekend weather forecast?",
+		answer:
+			"Thursday and Friday: Light rain with highs of 55°-63°. Saturday and Sunday: Partly sunny and warm with highs of 76°-79°.",
+	},
+	{
+		title: "Should I bring a specific shirt for a group photo?",
+		answer:
+			"Yes. Please bring your ORC shirt so the entire group can take a picture together.",
+	},
+	{
+		title: "What is Kelly's phone number and email?",
+		answer:
+			"You can reach Kelly by phone at 845-768-2312 or by email at kellycfitz00@yahoo.com.",
+	},
+];
 
 const TableRow: FC<{
 	room: string;
@@ -121,6 +270,16 @@ const VermontTrip: FC = () => {
 					href="#room-assignments"
 				>
 					Room assignments
+				</Button>
+				<Button
+					colorPalette="blue"
+					size="xl"
+					variant="surface"
+					as="a"
+					// @ts-expect-error - we're using it as a link
+					href="#faqs"
+				>
+					FAQs
 				</Button>
 				<Button
 					colorPalette="red"
@@ -374,6 +533,33 @@ const VermontTrip: FC = () => {
 						/>
 					</Table.Body>
 				</Table.Root>
+			</Box>
+			<Box
+				borderColor={useColorModeValue("gray.400", "gray.600")}
+				borderWidth={1}
+				borderStyle="solid"
+				width="80%"
+			/>
+			<Box id="faqs">
+				<Text fontSize="1.5rem" marginBlockEnd={8} textAlign="center">
+					<b>FAQs</b>
+				</Text>
+				<VStack alignItems="start" gap={6}>
+					{faqs.map((faq) => (
+						<Card.Root
+							size="sm"
+							key={faq.title}
+							style={{
+								width: "100%",
+							}}
+						>
+							<Card.Header>
+								<Heading size="md">{faq.title}</Heading>
+							</Card.Header>
+							<Card.Body color="fg.muted">{faq.answer}</Card.Body>
+						</Card.Root>
+					))}
+				</VStack>
 			</Box>
 			<Box
 				borderColor={useColorModeValue("gray.400", "gray.600")}
