@@ -65,6 +65,20 @@ const routes: RouteItem[] = [
 		gpxUrl: "https://connect.garmin.com/modern/course/446500092",
 		tags: ["flat"],
 	},
+	{
+		name: "School + Hillside + reverse Pearl",
+		distance: 5.02,
+		elevation: 334,
+		gpxUrl: "https://connect.garmin.com/app/course/478376023",
+		tags: ["hills"],
+	},
+	{
+		name: "Armory",
+		distance: 5.24,
+		elevation: 99,
+		gpxUrl: "https://connect.garmin.com/app/course/478376069",
+		tags: ["flat"],
+	},
 ];
 
 const defaultState: ModerateMondayState = {
